@@ -1,0 +1,516 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    display: block;
+    overflow-x: auto; 
+}
+
+/*-------------menu1.tsx--------------*/
+.menuContainer {
+    max-width: 5050px;
+    height: 70px;
+    background-color: #2E2E2E;
+    display: flex; /* Flex untuk memudahkan pengaturan layout */
+    position: fixed; /* Membuat menu tetap di atas saat di-scroll */
+    top: 0; /* Tempatkan di bagian atas halaman */
+    left: 0; /* Tempatkan di sebelah kiri */
+    width: 100%; /* Buat menu penuh selebar halaman */
+    z-index: 1000; /* Pastikan menu berada di atas konten lainnya */
+}
+.buttonMenu {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    margin-top: 16px;
+    margin-left: 40px;
+}
+.buttonMenu:hover {
+    content: url('../images/menuButton.png'); /* Ganti gambar saat hover */
+}
+
+/*--------------------------------------------------------------------------*/
+
+/*-------------------navbar.tsx------------------------*/
+.sideNav {
+    width: 240px;
+    height: 100%; /* Buat sideNav penuh tinggi halaman */
+    background-color: #2E2E2E;
+    position: fixed; /* Fixed untuk membuat menu mengikuti scroll */
+    top: 70px; /* Sejajarkan dengan menuContainer */
+    left: -100%; /* Sembunyikan sidebar di luar layar secara default */
+    transition: all 0.5s ease; /* Transisi lebih cepat saat sideNav muncul */
+    z-index: 999; /* Pastikan sideNav di atas konten */
+}
+.sideNav.active {
+    left: 0; /* Munculkan sideNav saat menu aktif */
+}
+.sideNav ul {
+    padding: 0 3px;
+}
+.sideNav ul li {
+    list-style-type: none;
+    margin: 10px 0;
+}
+.sideNav ul li a {
+    color: #eaecef;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+.sideNav ul li a:hover, .sideNav ul li a.active {
+    background: #4b4b4b;
+}
+.logo {
+    width: 70px;
+    height: 70px;
+    margin-left: 54px;
+}
+
+
+/*--------content.tsx-------------*/
+.contentContainer{
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex; /* Flexbox layout untuk box dan box2 */    
+    width: 100%; /* Mengambil lebar penuh */
+}
+
+/*table beranda*/
+.berandaContentTable{
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+.berandaContentTable table{
+    border: 2px solid #2E2E2E;
+}
+
+/*deretan atas (box)*/
+.boxContainer{
+    margin-left: 80px;
+    margin-right: 80px;
+    
+    padding: 0;
+    display: flex; /* Flexbox layout untuk box dan box2 */    
+    width: auto; 
+        
+}
+.box, .box2{
+    width: 450px;
+    height: 390px;
+    margin-top: 90px;
+    background-color: #E9E9E9;
+    border: 3px solid black;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column; /* Mengatur item di dalam box agar vertikal */
+    overflow-y: auto; /* Tambahkan scroll jika konten melebihi tinggi box */
+    padding: 20px; /* Berikan padding agar isi tidak terlalu mepet */
+    transition: all 0.5s ease;
+
+}
+.box {
+    flex-direction: column;  /* Dorong ke kiri */
+}
+
+/*dalam box*/
+.judulboxContainer{
+    display: flex;
+}
+.judulBox{
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-flex;
+    justify-content: center;
+}
+.inputStore{
+    max-width: 280px;
+    min-width: auto;
+    max-height: 40px;
+    min-height: auto;
+    margin-top: 25px;
+    margin-left: 20px;
+    background-color: #E9E9E9;
+    border-bottom: 3px solid #2E2E2E;
+    display: inline-flex;
+}
+.inputStore:focus{
+    outline: none;
+}
+.buttonSearch{
+    height: 26px;
+    width: 26px;
+    margin-top: 32px;
+    margin-left: 15px;
+    display: inline-flex;
+}
+.checkboxContainer {
+    display: flex; /* Flexbox untuk menata checkbox di kiri dan label di kanan */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    margin-bottom: 10px; /* Jarak antar checkbox */
+}
+.isiBox {
+    display: flex;
+    flex-direction: column; /* Menyusun pasangan checkbox dan label secara vertikal */
+    width: 100%; /* Memastikan elemen mengambil lebar penuh */
+    padding: 10px; /* Tambahan padding jika diperlukan */
+    overflow-y: auto; /* Tambahan padding jika diperlukan */
+}
+.isiBox .checkboxContainer {
+    display: flex; /* Flexbox untuk menata checkbox dan label dalam satu baris */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    margin-bottom: 10px; /* Jarak vertikal antara setiap checkbox dan label */
+}
+.checkboxStore{
+    height: 30px;
+    width: 30px;
+    appearance: none;
+    border: 4px solid #2E2E2E;
+    border-radius: 7px;
+    margin-left: 23px;
+    margin-top: 10px;
+    cursor: pointer; /* Menambahkan pointer cursor saat hover */
+    
+}
+.checkboxStore:checked {
+    background-color: white; /* Warna saat dicentang */
+    border: 2px solid #4CAF50; /* Ubah warna border saat dicentang */
+}
+.namaStore{
+    margin-left: 25px;
+    margin-top: 10px;
+    font-size: 25px;
+}
+.box2 { /* Dorong ke kanan */
+    flex-direction: column;
+    display: inline-block;
+}
+
+/***********************************************/
+
+/*button tengah*/
+
+.buttonContainer {
+    display: flex;
+    margin-top: 40px;
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+    align-items: center; /* Menyelaraskan tombol di tengah (opsional) */
+    gap: 10px; /* Jarak antar tombol */
+    margin-right: 10px;
+    margin-left: 10px;
+}
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.buttonTengah{
+    margin: 0;
+    margin-top: 70px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: inline-flex;
+    
+}
+.buttonTengah1{
+    margin-top: 20px;
+}
+
+/*************************************************/
+
+/*isi dibawah deretan box*/
+.divisiContainer {
+    width: 100%;
+    padding: 0%;
+}
+.formContainer{
+    display: flex;
+    font-size: 40px;
+}
+.formContainer h1{
+    width: 70%;
+}
+.formContainer input{
+    border-bottom: 3px solid #2E2E2E;
+}
+.formContainer input:focus{
+    outline: none;
+}
+.searchCode{
+    margin-left: 10px;
+    margin-top: 17px;
+    width: 30px;
+    height: 30px;
+}
+.formContainer select {
+    width: 520px;
+    height: 30px;
+    font-size: 20px;
+    border: 2px solid #2E2E2E;
+}
+
+/************************************************/
+
+/*table*/
+
+.layoutTabel{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Tengah horizontal */
+    align-items: flex-end; /* Tengah vertikal di bagian bawah */
+    padding-bottom: 20px; /* Ruang di bawah tabel */
+}
+.layoutTabel table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+}
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+} 
+th {
+    background-color: #2E2E2E;
+    color: #ffffff;
+    text-align: left;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+/*********************************************************************/
+
+/*kurang tambah*/
+
+.kurangTambah {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center; /* Menempatkan elemen di sisi kanan dan kiri */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    gap: 40px;
+}
+.buttonLeft{
+    width: 70px; /* Ukuran button kiri */
+    height: 70px;
+}
+.buttonRight{
+    width: 70px; /* Ukuran button kiri */
+    height: 70px;
+}
+
+/*-------------------------------------------------------------------*/
+
+/*----------------Login----------------*/
+
+.loginContainer {
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex; /* Flexbox layout untuk box dan box2 */
+    flex-direction: column; /* Elemen berderet kebawah */
+    width: 100vw; /* Lebar penuh */
+    height: 100vh; /* Tinggi penuh */
+}
+
+.boxLoginContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column; /* Tambahkan ini jika ingin isi box juga berderet ke bawah */
+    width: 380px;
+    height: 330px;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+}
+
+.logoLogin {
+    width: 80px;
+    height: 80px;
+    display: block;
+    justify-content: center;
+    margin: 0 auto; /* Agar berada di tengah */
+}
+
+.logoJudulLogin {
+    justify-content: center;
+    display: block;
+    margin-top: 30px;
+}
+
+.logoJudulLogin p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.inputLogin{
+    margin-top: 20px;
+    width: 340px;
+}
+.inputLogin p{
+    margin: 0;
+}
+.inputLogin input{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 330px;
+    height: 30px;
+    background-color: #d9d9d9;
+    border-bottom: 3px solid #2E2E2E;
+}
+
+.inputLogin input:focus{
+    outline: none;
+}
+/*-----------------------------------------------------*/
+
+/*$$$$$$$$$$$$$$$$$$$ responsif $$$$$$$$$$$$$$$$$$$$$$$*/
+
+@media screen and (min-width: 1551px) and (max-width: 1920px){
+    .boxContainer{
+        justify-content: center;
+        align-items: center;
+    }    
+
+    .divisiContainer{
+        margin-top: 50px;
+    }
+
+    .formContainer{
+        margin-left: 300px;
+        margin-right:300px;
+    }
+    .formContainer select {
+        width: 520px;
+        font-size: 20px;
+        border: 2px solid #2E2E2E;
+    }
+}
+
+@media screen and (min-width: 1351px) and (max-width: 1550px){
+    .formContainer{
+        margin-left: 120px;
+        margin-right:120px;
+    }
+    .divisiContainer{
+        margin-top: 50px;
+    }
+
+    .formContainer select {
+        width: 520px;
+        font-size: 20px;
+        border: 2px solid #2E2E2E;
+    }
+}
+
+@media screen and (min-width: 931px) and (max-width: 1350px){
+    .box .box2{
+        width: 300px;
+    }
+    .divisiContainer{
+        margin-top: 50px;
+    }
+
+    .formContainer{
+        margin-left: 60px;
+        margin-right:60px;
+    }
+    .formContainer select {
+        width: 520px;
+        font-size: 20px;
+        border: 2px solid #2E2E2E;
+    }
+}
+
+@media screen and (max-width: 930px){
+    .menuContainer{
+        max-width: 1800px;
+    }
+    .boxContainer{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .box, .box2{
+        width: 350px;
+        height: 300px;
+    }
+    .judulBox{
+        font-size: 28px;
+    }
+    
+    .inputStore{
+        width: 160px;
+        margin-top: 20px;
+        margin-left: 12px;
+    }
+        
+    .buttonContainer {
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        gap: 1px; 
+    }
+      
+    .buttonTengah{
+        margin-top: -20px;
+        
+    }
+    .buttonTengah1{
+        margin-top: 10px;
+        height: 52px;
+        width: 52px;
+    }
+
+    .box2{
+        margin-top: 15px;
+    }
+
+    .divisiContainer {
+        width: 100%;
+        margin-top: 40px;
+    }
+    
+    .formContainer{
+        font-size: 30px;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .formContainer h1{
+        width: 40%;
+    }
+    .formContainer input{
+        border-bottom: 3px solid #2E2E2E;
+        width: 300px;
+    }
+    
+    .searchCode{
+        margin-left: 25px;
+        margin-top: 15px;
+        width: 30px;
+        height: 30px;    
+    }
+    
+    .formContainer select {
+        width: 300px;
+        font-size: 20px;
+        border: 2px solid #2E2E2E;
+    }
+}
+

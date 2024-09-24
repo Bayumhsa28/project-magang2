@@ -1,0 +1,30 @@
+/*-------------menu1.tsx--------------*/
+.menuContainer {
+    max-width: 5050px;
+    height: 70px;
+    background-color: #2E2E2E;
+    display: flex; /* Flex untuk memudahkan pengaturan layout */
+    position: fixed; /* Membuat menu tetap di atas saat di-scroll */
+    top: 0; /* Tempatkan di bagian atas halaman */
+    left: 0; /* Tempatkan di sebelah kiri */
+    width: 100%; /* Buat menu penuh selebar halaman */
+    z-index: 1000; /* Pastikan menu berada di atas konten lainnya */
+}
+.buttonMenu {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    margin-top: 16px;
+    margin-left: 40px;
+}
+.buttonMenu:hover {
+    content: url("../../../pages/images/menuButton.png"); /* Ganti gambar saat hover */
+}
+
+/*--------------------------------------------------------------------------*/
+
+@media screen and (max-width: 930px){
+    .menuContainer{
+        max-width: 1800px;
+    }
+}

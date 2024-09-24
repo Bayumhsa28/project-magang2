@@ -1,0 +1,38 @@
+
+/*-------------------navbar.tsx------------------------*/
+.sideNav {
+    width: 240px;
+    height: 100%; /* Buat sideNav penuh tinggi halaman */
+    background-color: #2E2E2E;
+    position: fixed; /* Fixed untuk membuat menu mengikuti scroll */
+    top: 70px; /* Sejajarkan dengan menuContainer */
+    left: -100%; /* Sembunyikan sidebar di luar layar secara default */
+    transition: all 0.5s ease; /* Transisi lebih cepat saat sideNav muncul */
+    z-index: 999; /* Pastikan sideNav di atas konten */
+}
+.sideNav.active {
+    left: 0; /* Munculkan sideNav saat menu aktif */
+}
+.sideNav ul {
+    padding: 0 3px;
+}
+.sideNav ul li {
+    list-style-type: none;
+    margin: 10px 0;
+}
+.sideNav ul li a {
+    color: #eaecef;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+.sideNav ul li a:hover, .sideNav ul li a.active {
+    background: #4b4b4b;
+}
+.logo {
+    width: 70px;
+    height: 70px;
+    margin-left: 54px;
+}
