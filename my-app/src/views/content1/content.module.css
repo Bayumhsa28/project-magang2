@@ -104,7 +104,7 @@
     align-items: center; /* Menyelaraskan elemen secara vertikal */
     margin-bottom: 10px; /* Jarak vertikal antara setiap checkbox dan label */
 }
-.checkboxStore{
+.checkboxStore {
     height: 30px;
     width: 30px;
     appearance: none;
@@ -112,13 +112,32 @@
     border-radius: 7px;
     margin-left: 23px;
     margin-top: 10px;
-    cursor: pointer; /* Menambahkan pointer cursor saat hover */
-    
+    cursor: pointer; /* Pointer cursor on hover */
+    position: relative; /* Positioning for the pseudo-element */
+    background-color: transparent; /* Background transparent */
 }
+
+/* Styles for the checked state */
 .checkboxStore:checked {
-    background-color: white; /* Warna saat dicentang */
-    border: 2px solid #4CAF50; /* Ubah warna border saat dicentang */
+    background-color: white; /* Background color when checked */
+    border: 2px solid #0083fd; /* Border color when checked */
 }
+
+/* Adding a checkmark using a pseudo-element */
+.checkboxStore:checked::after {
+    content: ""; /* This is necessary for the pseudo-element to be displayed */
+    position: absolute;
+    left: 7px; /* Adjust based on your design */
+    top: 0px; /* Adjust based on your design */
+    width: 10px; /* Adjust width of checkmark */
+    height: 20px; /* Increase height for a fuller checkmark */
+    border: solid #0083fd; /* Color of the checkmark */
+    border-width: 0 3px 3px 0; /* Create the checkmark shape */
+    transform: rotate(45deg); /* Rotate to make a checkmark */
+    opacity: 1; /* Ensure the checkmark is fully visible */
+}
+
+
 .namaStore{
     margin-left: 25px;
     margin-top: 10px;
