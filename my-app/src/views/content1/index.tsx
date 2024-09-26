@@ -35,7 +35,7 @@ const Content1View = () => {
   const fetchItems = async (code) => {
     if (code) {
       try {
-        const response = await fetch(`/api/items?code=${code}`); // Kirimkan kode item ke API
+        const response = await fetch(`/api/items?itemCode=${code}`); // Kirimkan kode item ke API
         const data = await response.json();
         setFilteredItems(data); // Set filteredItems dengan data yang diterima
       } catch (error) {
@@ -45,6 +45,7 @@ const Content1View = () => {
       setFilteredItems([]); // Jika tidak ada kode, kosongkan filteredItems
     }
   };
+
 
   // Memanggil fetchItems setiap kali itemCode berubah
   useEffect(() => {

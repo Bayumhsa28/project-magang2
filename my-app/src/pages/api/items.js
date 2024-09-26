@@ -22,12 +22,22 @@ const Item = sequelize.define('item', {
 Item.belongsTo(SubFamily, { foreignKey: 'sub_family_id' });
 
 export default async function handler(req, res) {
-    try {
-        // Ambil data item beserta sub_family
-        const items = await Item.findAll({ include: SubFamily });
-        res.status(200).json(items);
-    } catch (error) {
-        console.error('Error fetching items:', error);
-        res.status(500).json({ message: 'Failed to retrieve items.' });
+    if (req.method === 'GET') {
+        const { itemCode } = req.query; // Ambil itemCode dari query
+
+        try {
+            // Ambil data item dengan filter berdasarkan itemCode
+            const items = await Item.findAll({
+                where: itemCode ? { item_code: itemCode } : {}, // Jika itemCode ada, gunakan untuk filter
+                include: SubFamily,
+            });
+            res.status(200).json(items);
+        } catch (error) {
+            console.error('Error fetching items:', error);
+            res.status(500).json({ message: 'Failed to retrieve items.' });
+        }
+    } else {
+        res.setHeader('Allow', ['GET']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
