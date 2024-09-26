@@ -1,44 +1,41 @@
-import { Model, DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '../lib/database'; // Pastikan jalur ini sesuai
+import SubFamily from './SubFamily'; // Import model SubFamily
 
-class Item extends Model {}
-
-Item.init({
+// Definisi model Item
+const Item = sequelize.define('item', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true,
-        primaryKey: true, // Menjadikan 'id' sebagai primary key
-        allowNull: false, // Tidak boleh null
     },
     sub_family_id: {
         type: DataTypes.INTEGER,
-        allowNull: false, // Tidak boleh null
-        references: {
-            model: 'sub_family', // Nama tabel sub_family
-            key: 'id', // Kolom yang direferensikan
-        },
+        allowNull: false,
     },
     item_code: {
         type: DataTypes.INTEGER,
-        allowNull: false, // Tidak boleh null
-        unique: true, // Harus unik
+        allowNull: false,
     },
     item_name: {
-        type: DataTypes.STRING, // Menggunakan STRING untuk menyimpan nama item
-        allowNull: false, // Tidak boleh null
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     unit: {
-        type: DataTypes.STRING(20), // Menggunakan STRING untuk menyimpan unit
-        allowNull: false, // Tidak boleh null
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     harga: {
-        type: DataTypes.DECIMAL(10, 2), // Menggunakan DECIMAL untuk harga
-        allowNull: false, // Tidak boleh null
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
     },
 }, {
-    sequelize,
-    tableName: 'item', // Nama tabel di database
-    timestamps: false, // Tidak ada kolom timestamp di tabel
+    timestamps: false,
+    tableName: 'item',
 });
+
+// Definisikan relasi
+Item.belongsTo(SubFamily, { foreignKey: 'sub_family_id' });
+
 
 export default Item;
