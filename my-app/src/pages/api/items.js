@@ -1,6 +1,7 @@
 // pages/api/items.js
 import { Sequelize, DataTypes } from 'sequelize';
 import sequelize from '../../../lib/database'; // Pastikan jalur ini sesuai
+import Item from '../../../models/Item';
 
 // Definisi model SubFamily
 const SubFamily = sequelize.define('sub_family', {
@@ -8,29 +9,41 @@ const SubFamily = sequelize.define('sub_family', {
     name: { type: DataTypes.STRING, allowNull: false },
 }, { timestamps: false, tableName: 'sub_family' });
 
-// Definisi model Item
-const Item = sequelize.define('item', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    sub_family_id: { type: DataTypes.INTEGER, allowNull: false },
-    item_code: { type: DataTypes.INTEGER, allowNull: false },
-    item_name: { type: DataTypes.STRING, allowNull: false },
-    unit: { type: DataTypes.STRING, allowNull: false },
-    harga: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-}, { timestamps: false, tableName: 'item' });
-
 // Definisikan relasi
 Item.belongsTo(SubFamily, { foreignKey: 'sub_family_id' });
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
-        const { itemCode } = req.query; // Ambil itemCode dari query
+        const { itemCode, subFamilyId, subFamilyName } = req.query; // Ambil itemCode, subFamilyId, dan subFamilyName dari query
 
         try {
-            // Ambil data item dengan filter berdasarkan itemCode
-            const items = await Item.findAll({
-                where: itemCode ? { item_code: itemCode } : {}, // Jika itemCode ada, gunakan untuk filter
+            // Buat objek filter untuk query
+            const filter = {
                 include: SubFamily,
-            });
+            };
+
+            // Tambahkan filter berdasarkan itemCode jika ada
+            if (itemCode) {
+                filter.where = { item_code: itemCode };
+            }
+
+            // Jika subFamilyId atau subFamilyName ada, tambahkan ke filter
+            if (subFamilyId) {
+                filter.where = {
+                    ...filter.where,
+                    sub_family_id: subFamilyId,
+                };
+            }
+
+            if (subFamilyName) {
+                filter.include = {
+                    model: SubFamily,
+                    where: { name: subFamilyName },
+                };
+            }
+
+            // Ambil data item dengan filter
+            const items = await Item.findAll(filter);
             res.status(200).json(items);
         } catch (error) {
             console.error('Error fetching items:', error);

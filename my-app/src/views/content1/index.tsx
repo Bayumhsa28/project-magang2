@@ -18,6 +18,7 @@ const Content1View = () => {
   const [items, setItems] = useState([]); // State untuk semua item
   const [filteredItems, setFilteredItems] = useState([]); // State untuk item yang terfilter
 
+    //controller mencari nama toko mengambil dari api Stores
   useEffect(() => {
     const fetchStores = async () => {
       try {
@@ -32,25 +33,6 @@ const Content1View = () => {
     fetchStores(); // Ambil data stores saat komponen dipasang
   }, []);
 
-  const fetchItems = async (code) => {
-    if (code) {
-      try {
-        const response = await fetch(`/api/items?itemCode=${code}`); // Kirimkan kode item ke API
-        const data = await response.json();
-        setFilteredItems(data); // Set filteredItems dengan data yang diterima
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
-    } else {
-      setFilteredItems([]); // Jika tidak ada kode, kosongkan filteredItems
-    }
-  };
-
-
-  // Memanggil fetchItems setiap kali itemCode berubah
-  useEffect(() => {
-    fetchItems(itemCode);
-  }, [itemCode]);
 
   const filteredStores = stores.filter(store =>
     store.flag.toLowerCase().includes(searchTerm.toLowerCase())
@@ -110,6 +92,27 @@ const Content1View = () => {
       ...selectedStores
     ]);
   };
+
+  //controller Id item mengambil
+  //memanggil item code secara rinci
+  const fetchItems = async (code) => {
+    if (code) {
+      try {
+        const response = await fetch(`/api/items?itemCode=${code}`); // Kirimkan kode item ke API
+        const data = await response.json();
+        setFilteredItems(data); // Set filteredItems dengan data yang diterima
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    } else {
+      setFilteredItems([]); // Jika tidak ada kode, kosongkan filteredItems
+    }
+  };
+
+  // Memanggil fetchItems setiap kali itemCode berubah
+  useEffect(() => {
+    fetchItems(itemCode);
+  }, [itemCode]);
 
   return (
     <div className={styles.customeBody}>
@@ -208,7 +211,7 @@ const Content1View = () => {
 
           <div className={styles.formContainer}>
             <h1>Sub Family</h1>
-            <input type="text" />
+            <input/>
           </div>
 
           <div className={styles.formContainer}>
